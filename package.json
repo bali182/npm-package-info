@@ -1,11 +1,11 @@
 {
-  "name": "npm-package-info",
+  "name": "npm-package-lookup",
   "version": "0.0.0",
   "description": "Package for lookup and query information about packages in the npm registry",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bali182/npm-package-info.git"
+    "url": "git+https://github.com/bali182/npm-package-lookup.git"
   },
   "keywords": [
     "npm",
@@ -16,9 +16,9 @@
   "author": "Balazs Edes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bali182/npm-package-info/issues"
+    "url": "https://github.com/bali182/npm-package-lookup/issues"
   },
-  "homepage": "https://github.com/bali182/npm-package-info#readme",
+  "homepage": "https://github.com/bali182/npm-package-lookup#readme",
   "dependencies": {
     "node-fetch": "^1.3.3",
     "query-string": "^3.0.0"
