@@ -28,7 +28,6 @@ function fetchJson(url, options) {
 // returns a Promise, with the {name, description} objects of the matching packages
 function search(keyword) {
   return fetchJson(getSearchUrl(keyword)).then(function (results) {
-    console.log(results);
     return (results.rows || []).map(function (row) {
       return row.key[0];
     });
