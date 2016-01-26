@@ -43,3 +43,8 @@ function versions(name) {
     });
   });
 }
+
+module.exports = {
+  search: search,
+  versions: versions
+};
