@@ -1,5 +1,8 @@
 var fetch = require('node-fetch');
 var queryString = require('query-string');
+var semverStable = require('semver-stable');
+var semver = require('semver-utils');
+var memoize = require('lodash.memoize');
 
 // Url for prefix searching npm repositories
 function getSearchUrl(keyword, limit) {
@@ -33,13 +36,47 @@ function search(keyword) {
     });
   });
 }
+
+
+
 // Returns all the available versions for the given package in reverse order (newest first)
-function versions(name) {
+function versions(name, options) {
+  options = options || {};
+  var stable = !!options.stable;
+  var sort = options.sort ? (options.sort.toString().toUpperCase() === 'ASC' ? 1 : -1) : false;
+
   return fetchJson(getPackageUrl(name)).then(function (packageInfo) {
     var versionsObject = packageInfo.versions || {};
-    return Object.keys(versionsObject).sort(function (a, b) {
-      return b.localeCompare(a)
-    });
+    var vers = Object.keys(versionsObject);
+    if (stable) {
+      vers = vers.filter(function (version) {
+        return semverStable.is(version);
+      });
+    }
+    if (sort) {
+      var parse = memoize(function parse(version) {
+        return semver.parse(version);
+      });
+      var compare = function compareSemvers(a, b) {
+        a = parse(a);
+        b = parse(b);
+        if (a.major !== b.major) {
+          return (a.major || 0) - (b.major || 0);
+        }
+        if (a.minor !== b.minor) {
+          return (a.minor || 0) - (b.minor || 0);
+        }
+        if (a.patch !== b.patch) {
+          return (a.patch || 0) - (b.patch || 0);
+        }
+        return 0;
+      };
+      var compareWithSortOrder = function (a, b) {
+        return sort * compare(a, b);
+      }
+      vers = vers.sort(compareWithSortOrder);
+    }
+    return vers;
   });
 }
 
