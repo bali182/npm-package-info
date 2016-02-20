@@ -37,8 +37,6 @@ function search(keyword) {
   });
 }
 
-
-
 // Returns all the available versions for the given package in reverse order (newest first)
 function versions(name, options) {
   options = options || {};
