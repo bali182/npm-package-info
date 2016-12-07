@@ -3,6 +3,9 @@
   "version": "0.2.0",
   "description": "Package for lookup and query information about packages in the npm registry",
   "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bali182/npm-package-lookup.git"
@@ -20,10 +23,17 @@
   },
   "homepage": "https://github.com/bali182/npm-package-lookup#readme",
   "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
     "lodash.memoize": "^4.0.1",
-    "node-fetch": "^1.3.3",
     "query-string": "^3.0.0",
     "semver-stable": "^2.0.4",
     "semver-utils": "^1.1.1"
+  },
+  "devDependencies": {
+    "jest": "^17.0.3"
+  },
+  "jest": {
+    "testRegex": "\\.(test|spec)\\.(js|jsx)$",
+    "verbose": true
   }
 }

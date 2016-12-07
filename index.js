@@ -1,4 +1,4 @@
-var fetch = require('node-fetch');
+var fetch = require('isomorphic-fetch');
 var queryString = require('query-string');
 var semverStable = require('semver-stable');
 var semver = require('semver-utils');
@@ -15,10 +15,10 @@ function getSearchUrl(keyword, limit) {
     end_key: '["' + (keyword + 'z') + '",{}]'
   });
 }
-  
+
 // Url for getting information about a specific repository
 function getPackageUrl(name) {
-  return "http://registry.npmjs.org/" + name;
+  return "https://registry.npmjs.org/" + name;
 }
 
 // utility, so I don't have to call .json() on each request
